@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Services - Medverve Healthcare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-yH4+QRO9uDFb+N8tHnDw0iXedj1yNQeZQ6GlzrEo6R+U5YNTlIl57Bz5oZe/OXkM3NUK7B+CN1jYBo+8Q5r9Ww=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    /* Base & Background Animation */
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: linear-gradient(45deg, #f5f9fc, #e0f7fa, #ffebee);
+      animation: backgroundAnimation 3s infinite alternate;
+    }
+    @keyframes backgroundAnimation {
+      0% { background-color: #f5f9fc; }
+      50% { background-color: #e0f7fa; }
+      100% { background-color: #ffebee; }
+    }
+
+    /* Loader Overlay */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #111;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      z-index: 1000;
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+    #loader.hidden {
+      opacity: 0; visibility: hidden;
+    }
+    .loader-shards {
+      position: relative; width: 150px; height: 150px;
+    }
+    .loader-shard {
+      position: absolute; width: 50%; height: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      transition: transform 1s ease;
+      transform: translate(var(--tx), var(--ty));
+    }
+    #loader.loaded .loader-shard {
+      transform: translate(0, 0);
+    }
+
+    /* Droplets */
+    .droplets-container {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; overflow: hidden;
+      z-index: -10;
+    }
+    .droplet {
+      position: absolute; top: -50px; width: 20px; height: 20px;
+      background: radial-gradient(circle, #ff5e62, #ff9966);
+      border-radius: 50%; opacity: 0.7;
+      animation: fall 10s linear infinite, colorChange 10s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(110vh) translateX(10px); }
+    }
+    @keyframes colorChange {
+      0%, 100% { background: radial-gradient(circle, #ff5e62, #ff9966); }
+      50% { background: radial-gradient(circle, #24c6dc, #514a9d); }
+    }
+
+    /* Navbar (Glassmorphic) */
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Service Cards */
+    .service-card {
+      position: relative;
+      display: flex; 
+      flex-direction: column; 
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      border-radius: 15px; 
+      padding: 2rem;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card::before {
+      content: "";
+      position: absolute; 
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: linear-gradient(45deg, #f8dbdb, #f8dfd3, #cdf2f6, #cbc8f4);
+      z-index: -1; 
+      border-radius: inherit; 
+      filter: blur(8px); 
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    }
+    .service-card:hover::before {
+      opacity: 1;
+    }
+    .service-title {
+      font-size: 1.75rem; 
+      font-weight: 700; 
+      color: #000;
+    }
+    .service-subtitle {
+      font-size: 1.25rem; 
+      font-weight: 600; 
+      margin-top: 1rem; 
+      color: #000;
+    }
+    .service-list {
+      margin-left: 1.5rem; 
+      color: #000;
+    }
+    .service-image {
+      width: 100%; 
+      border-radius: 15px;
+      transition: transform 0.5s, clip-path 0.5s;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .service-card:hover .service-image {
+      transform: scale(1.05);
+      clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    }
+    .service-card.reverse {
+      flex-direction: column-reverse;
+    }
+    /* Ensure service content and image containers are responsive */
+    .service-content, .service-image-container {
+      width: 100%;
+    }
+    @media (min-width: 768px) {
+      .service-card {
+        flex-direction: row; 
+        align-items: center;
+      }
+      .service-card.reverse {
+        flex-direction: row-reverse;
+      }
+      .service-content, .service-image-container {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-shards">
+      <div class="loader-shard" style="top:0; left:0; --tx:-80px; --ty:-80px;"></div>
+      <div class="loader-shard" style="top:0; right:0; --tx:80px; --ty:-80px;"></div>
+      <div class="loader-shard" style="bottom:0; left:0; --tx:-80px; --ty:80px;"></div>
+      <div class="loader-shard" style="bottom:0; right:0; --tx:80px; --ty:80px;"></div>
+    </div>
+  </div>
+
+  <!-- Droplets -->
+  <div class="droplets-container">
+    <div class="droplet" style="left:10%; animation-duration:7s; animation-delay:0s;"></div>
+    <div class="droplet" style="left:30%; animation-duration:6s; animation-delay:1s;"></div>
+    <div class="droplet" style="left:50%; animation-duration:8s; animation-delay:2s;"></div>
+    <div class="droplet" style="left:70%; animation-duration:5s; animation-delay:3s;"></div>
+    <div class="droplet" style="left:90%; animation-duration:9s; animation-delay:4s;"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="bg-white py-3 px-6 text-gray-800 shadow-md relative">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img
+          src="Images/Medverve_Final_28-03-2013__1___1_-removebg-preview.png"
+          alt="Medverve Logo"
+          class="h-14 w-11 rounded-full"
+        />
+        <h1 class="text-lg font-semibold" style="color: #0077b6;">Medverve</h1>
+      </div>
+      <ul class="hidden md:flex gap-8 text-base font-medium">
+        <li><a href="index.html" class="hover:text-blue-600 transition">Home</a></li>
+        <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+        <li><a href="Services1.html" class="hover:text-blue-600 transition">Services</a></li>
+        <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+      </ul>
+      <a
+        href="http://apps.medverve.com/"
+        class="hidden md:block border-2 border-blue-600 px-4 py-1 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition"
+      >
+        Login
+      </a>
+      <button id="menu-toggle" class="md:hidden text-gray-800 text-2xl focus:outline-none">☰</button>
+    </div>
+    <ul id="mobile-menu" class="hidden md:hidden flex-col bg-white p-4 mt-2 space-y-2 text-base font-medium">
+      <li><a href="index.html" class="hover:text-blue-600 block">Home</a></li>
+      <li><a href="about.html" class="hover:text-blue-600 block">About Us</a></li>
+      <li><a href="Services1.html" class="hover:text-blue-600 block">Services</a></li>
+      <li><a href="contact.html" class="hover:text-blue-600 block">Contact</a></li>
+      <li>
+        <a
+          href="http://apps.medverve.com/"
+          class="border-2 border-blue-600 px-4 py-1 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition block text-center"
+        >
+          Login
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      loader.classList.add("loaded");
+      setTimeout(() => {
+        loader.classList.add("hidden");
+      }, 1200);
+    });
+  </script>
+
+  <!-- Hero Section with Canvas Background -->
+  <section class="relative min-h-screen flex items-center justify-center text-center px-4 pt-20">
+    <!-- Canvas Animation Background -->
+    <canvas id="hero-canvas" class="absolute inset-0 z-0"></canvas>
+    <!-- Hero Content (Overlay) -->
+    <div class="relative z-10">
+      <h2 class="text-white text-5xl md:text-7xl font-extrabold mb-4 fade-in" style="animation-delay: 0.2s;">
+        OUR SERVICES
+      </h2>
+      <p class="text-white text-xl md:text-2xl max-w-3xl mb-8 fade-in" style="animation-delay: 0.4s;">
+        We redefine healthcare excellence with innovation and precision.
+      </p>
+      <a href="#services" class="bg-blue-500 hover:bg-blue-700 transition-colors px-6 py-3 rounded-full font-semibold fade-in" style="animation-delay: 0.6s;">
+        Discover More
+      </a>
+    </div>
+  </section>
+
+  <!-- Canvas Animation Script for Hero Section -->
+  <script>
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+    
+    const particles = [];
+    const particleCount = 100;
+    
+    class Particle {
+      constructor() {
+        this.init();
+      }
+      init() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.speed = 0.5 + Math.random() * 1.5;
+        this.angle = Math.random() * Math.PI * 2;
+        this.radius = Math.random() * 2 + 1;
+        this.hue = Math.random() * 360;
+      }
+      update() {
+        this.angle += 0.005;
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+          this.init();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, 0.8)`;
+        ctx.fill();
+      }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    function animate() {
+      ctx.fillStyle = 'rgba(10, 10, 20, 0.1)';
+      ctx.fillRect(0, 0, width, height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        // Draw connecting lines if particles are close
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(200, 200, 255, ${1 - dist/100})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+  </script>
+
+ <!-- Services Section -->
+<section id="services" class="py-14">
+  <div class="max-w-7xl mx-auto space-y-16">
+    
+    <!-- Revenue Cycle Management -->
+    <div id="revenue-cycle-management" class="service-card">
+      <div class="service-content">
+        <h3 class="service-title">Revenue Cycle Management</h3>
+        <h4 class="service-subtitle">How We Help:</h4>
+        <ul class="service-list list-disc">
+          <li>Simplify Aggregate Credit with accelerated innovation to build sustainable Healthcare</li>
+          <li>Real-time business analysis and performance management with key financial indicators – Cash Flow, outstanding, Collections, etc.</li>
+          <li>Manage payer contracts and renewals.</li>
+        </ul>
+      </div>
+      <div class="service-image-container">
+        <img src="Images/re.jpg" alt="Revenue Cycle Management" class="service-image" />
+      </div>
+    </div>
+
+    <!-- Claim Quality Check (CQC) -->
+    <div id="claim-quality-check" class="service-card">
+      <div class="service-content">
+        <h3 class="service-title">Claim Quality Check (CQC)</h3>
+        <h4 class="service-subtitle">Issues We Address:</h4>
+        <ul class="service-list list-disc">
+          <li>Non‑submission of claim documents</li>
+          <li>Incomplete document submission</li>
+          <li>Code errors causing denials</li>
+          <li>Missed billing opportunities</li>
+          <li>Short payments from payers</li>
+          <li>Unanswered post‑dispatch queries</li>
+        </ul>
+        <h4 class="service-subtitle">How We Help:</h4>
+        <ul class="service-list list-disc">
+          <li>Dynamic Checklist for complete and accurate document submission</li>
+          <li>Error-free processing for seamless claim approvals</li>
+          <li>Automated QC Report generation and email updates to management</li>
+        </ul>
+      </div>
+      <div class="service-image-container">
+        <img src="Images/20944105-Photoroom.png" alt="Claim Quality Check" class="service-image" />
+      </div>
+    </div>
+
+    <!-- Reconciliation Services (Reverse Card) -->
+    <div id="reconciliation-services" class="service-card reverse">
+      <div class="service-content">
+        <h3 class="service-title">Reconciliation Services</h3>
+        <h4 class="service-subtitle">Issues We Address:</h4>
+        <ul class="service-list list-disc">
+          <li>Missing or misrecorded claim IDs</li>667
+          <li>Inaccurate reconciliation affecting financial data</li>
+          <li>Delayed responses to post-dispatch queries</li>
+          <li>Increased suspense amounts from unresolved transactions</li>
+          <li>Lack of clarity on disallowance reasons from payers</li>
+        </ul>
+        <h4 class="service-subtitle">How We Help:</h4>
+        <ul class="service-list list-disc">
+          <li>Correcting missing or misrecorded claim IDs</li>
+          <li>AI-powered reconciliation capturing settlement details</li>
+          <li>Automated notifications for query resolution</li>
+          <li>Real-time tracking for precise claim and bank reconciliation</li>
+          <li>Identifying and explaining disallowances</li>
+        </ul>
+      </div>
+      <div class="service-image-container">
+        <img src="Images/Recon.jpg" alt="Reconciliation Services" class="service-image" />
+      </div>
+    </div>
+
+    <!-- Social Schemes Management -->
+    <div id="social-schemes-management" class="service-card">
+      <div class="service-content">
+        <h3 class="service-title">Social Schemes Management</h3>
+        <h4 class="service-subtitle">Issues We Address:</h4>
+        <ul class="service-list list-disc">
+          <li>Incomplete document submission leading to NMIs and delayed payments</li>
+          <li>Challenges with inaccurate deductions in claim settlements</li>
+        </ul>
+        <h4 class="service-subtitle">How We Help:</h4>
+        <ul class="service-list list-disc">
+          <li>Thorough CQC to reduce NMIs and delayed payments</li>
+          <li>Review requests on specific payers to contest inaccurate deductions</li>
+          <li>Leveraging strong relationships with payers to expedite payments</li>
+        </ul>
+      </div>
+      <div class="service-image-container">
+        <img src="Images/SocialSchemes.jpg" alt="Social Schemes Management" class="service-image" />
+      </div>
+    </div>
+
+    <!-- Accounts Receivable Management -->
+    <div id="accounts-receivable-management" class="service-card">
+      <div class="service-content">
+        <h3 class="service-title">Accounts Receivable Management</h3>
+        <h4 class="service-subtitle">Issues We Address:</h4>
+        <ul class="service-list list-disc">
+          <li>Delay in settlement</li>
+        </ul>
+        <h4 class="service-subtitle">How We Help:</h4>
+        <ul class="service-list list-disc">
+          <li>Real-time updates and actionable insights via our RCM platform</li>
+          <li>Leveraging strong relationships with payers to expedite payments</li>
+        </ul>
+      </div>
+      <div class="service-image-container">
+        <img src="Images/10191042.jpg" alt="Accounts Receivable Management" class="service-image" />
+      </div>
+    </div>
+
+    <!-- Reimbursement Financing -->
+    <div id="reimbursement-financing" class="service-card">
+      <div class="service-content">
+        <h3 class="service-title">Reimbursement Financing</h3>
+        <h4 class="service-subtitle">Issues We Address:</h4>
+        <ul class="service-list list-disc">
+          <li>Potential revenue loss with non-empanelled payers</li>
+        </ul>
+        <h4 class="service-subtitle">How We Help:</h4>
+        <ul class="service-list list-disc">
+          <li>Cashless service for patients with non-empanelled payers</li>
+          <li>Immediate payment to hospitals</li>
+        </ul>
+      </div>
+      <div class="service-image-container">
+        <img src="Images/rembursement financing.jpg" alt="Reimbursement Financing" class="service-image" />
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-blue-900 to-blue-600 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <!-- Company Info -->
+      <div>
+        <h2 class="text-2xl font-bold">Medverve</h2>
+        <p class="text-gray-300 mt-2">Building Healthier Healthcare Systems.</p>
+        <div class="flex space-x-4 mt-4">
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-semibold">Quick Links</h3>
+        <ul class="mt-4 space-y-2">
+          <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+          <li><a href="about.html" class="hover:text-gray-300">About Us</a></li>
+          <li><a href="Services1.html" class="hover:text-gray-300">Services</a></li>
+          <li><a href="contact.html" class="hover:text-gray-300">Contact Us</a></li>
+          <li><a href="http://apps.medverve.com/" class="hover:text-gray-300">Login</a></li>
+        </ul>
+      </div>
+      <!-- Contact Details -->
+      <div>
+        <h3 class="text-xl font-semibold">Contact Us</h3>
+        <p class="mt-4 text-gray-300">info@medverve.com</p>
+        <!-- <p class="text-gray-300">+91-8050-071-616</p> -->
+        <p class="text-gray-300">
+          Rekha Classic Arch, 3rd Floor, #75, Panduranganagar, Bengaluru-560076, India
+        </p>
+      </div>
+      <!-- Newsletter Subscription -->
+      <!-- <div>
+        <h3 class="text-xl font-semibold">Stay Updated</h3>
+        <p class="text-gray-300 mt-2">Subscribe to our newsletter for the latest updates.</p>
+        <div class="mt-4 flex">
+          <input type="email" class="w-full px-4 py-2 rounded-l-lg text-gray-900 focus:outline-none" placeholder="Your email">
+          <button class="bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-r-lg">Subscribe</button>
+        </div>
+      </div>
+    </div> -->
+    <div class="mt-10 border-t border-gray-500 pt-6 text-center text-gray-300">
+      <p>&copy; 2025 Medverve. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    // Initialize Lucide Icons if needed
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

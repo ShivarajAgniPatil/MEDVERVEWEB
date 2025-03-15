@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services - Medverve Healthcare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animated Gradient Background for the body */
+    body {
+      animation: gradientAnimation 20s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
+      50% { background: linear-gradient(135deg, #fdbb2d, #b21f1f, #1a2a6c); }
+      100% { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
+    }
+
+    /* Floating Droplets Animation */
+    .droplets-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -10;
+      overflow: hidden;
+    }
+    .droplet {
+      position: absolute;
+      top: -50px;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ff5e62, #ff9966);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: fall 10s linear infinite, colorChange 10s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(110vh) translateX(15px); }
+    }
+    @keyframes colorChange {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(180deg); }
+    }
+
+    /* Glassmorphism Effect for Navbar and Cards */
+    .glass {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="text-white relative">
+  <!-- Floating Droplets Background -->
+  <div class="droplets-container">
+    <div class="droplet" style="left: 10%; animation-duration: 8s; animation-delay: 0s;"></div>
+    <div class="droplet" style="left: 30%; animation-duration: 10s; animation-delay: 1s;"></div>
+    <div class="droplet" style="left: 50%; animation-duration: 9s; animation-delay: 2s;"></div>
+    <div class="droplet" style="left: 70%; animation-duration: 7s; animation-delay: 3s;"></div>
+    <div class="droplet" style="left: 90%; animation-duration: 11s; animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Responsive Glassmorphic Navbar -->
+  <nav class="fixed top-0 w-full p-4 glass shadow-lg z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Medverve</h1>
+      <div class="hidden md:flex space-x-8 text-lg">
+        <a href="index.html" class="hover:text-blue-300 transition-colors">Home</a>
+        <a href="about.html" class="hover:text-blue-300 transition-colors">About Us</a>
+        <a href="Services1.html" class="hover:text-blue-300 transition-colors">Services</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors">Contact Us</a>
+        <a href="http://apps.medverve.com/" class="hover:text-blue-300 transition-colors">Login</a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none">
+        ☰
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white/20 backdrop-blur-lg">
+      <ul class="p-4 space-y-4">
+        <li><a href="index.html" class="hover:text-blue-300 transition-colors">Home</a></li>
+        <li><a href="about.html" class="hover:text-blue-300 transition-colors">About Us</a></li>
+        <li><a href="Services1.html" class="hover:text-blue-300 transition-colors">Services</a></li>
+        <li><a href="contact.html" class="hover:text-blue-300 transition-colors">Contact Us</a></li>
+        <li><a href="http://apps.medverve.com/" class="hover:text-blue-300 transition-colors">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+    <h2 class="text-5xl md:text-7xl font-extrabold mb-4 fade-in">OUR SERVICES</h2>
+    <p class="text-xl md:text-2xl mb-8 max-w-2xl fade-in" style="animation-delay: 0.3s;">
+      Transforming healthcare with innovative solutions and state‑of‑the‑art technology.
+    </p>
+    <a href="#services" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-all fade-in" style="animation-delay: 0.6s;">
+      Explore Our Services
+    </a>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20">
+    <div class="max-w-7xl mx-auto space-y-20">
+      <!-- Service Card: Claim Quality Check (CQC) -->
+      <div class="flex flex-col md:flex-row items-center gap-8 glass-card p-10 mx-4 fade-in">
+        <div class="w-full md:w-1/2">
+          <img src="20944105-Photoroom.png" alt="Claim Quality Check" class="rounded-2xl shadow-lg" />
+        </div>
+        <div class="w-full md:w-1/2 text-left">
+          <h3 class="text-3xl font-bold mb-4">Claim Quality Check (CQC)</h3>
+          <h4 class="text-xl font-semibold mb-2">Issues We Address:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Non‑submission of claim documents</li>
+            <li>Incomplete document submission</li>
+            <li>Code errors causing denials</li>
+            <li>Missed billing opportunities</li>
+            <li>Short payments from payers</li>
+            <li>Unanswered post‑dispatch queries</li>
+          </ul>
+          <h4 class="text-xl font-semibold mt-4 mb-2">How We Help:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Dynamic Checklist for accurate submissions</li>
+            <li>Error‑free processing for seamless approvals</li>
+            <li>Automated QC reports to management</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Service Card: Reconciliation Services -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-8 glass-card p-10 mx-4 fade-in">
+        <div class="w-full md:w-1/2">
+          <img src="Recon.jpg" alt="Reconciliation Services" class="rounded-2xl shadow-lg" />
+        </div>
+        <div class="w-full md:w-1/2 text-left">
+          <h3 class="text-3xl font-bold mb-4">Reconciliation Services</h3>
+          <h4 class="text-xl font-semibold mb-2">Issues We Address:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Missing or misrecorded claim IDs</li>
+            <li>Inaccurate financial data reconciliation</li>
+            <li>Delayed query responses</li>
+            <li>Unresolved transactions</li>
+            <li>Lack of clarity on payer disallowances</li>
+          </ul>
+          <h4 class="text-xl font-semibold mt-4 mb-2">How We Help:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Correction of claim IDs</li>
+            <li>AI‑powered reconciliation</li>
+            <li>Automated notifications</li>
+            <li>Real‑time tracking</li>
+            <li>Clarification on disallowances</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Service Card: Accounts Receivable Management -->
+      <div class="flex flex-col md:flex-row items-center gap-8 glass-card p-10 mx-4 fade-in">
+        <div class="w-full md:w-1/2">
+          <img src="10191042.jpg" alt="Accounts Receivable Management" class="rounded-2xl shadow-lg" />
+        </div>
+        <div class="w-full md:w-1/2 text-left">
+          <h3 class="text-3xl font-bold mb-4">Accounts Receivable Management</h3>
+          <h4 class="text-xl font-semibold mb-2">Issues We Address:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Delay in settlement</li>
+          </ul>
+          <h4 class="text-xl font-semibold mt-4 mb-2">How We Help:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Real‑time claim tracking</li>
+            <li>Expedited payments via strong payer relationships</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Service Card: Social Schemes Management -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-8 glass-card p-10 mx-4 fade-in">
+        <div class="w-full md:w-1/2">
+          <img src="scoial.jpg" alt="Social Schemes Management" class="rounded-2xl shadow-lg" />
+        </div>
+        <div class="w-full md:w-1/2 text-left">
+          <h3 class="text-3xl font-bold mb-4">Social Schemes Management</h3>
+          <h4 class="text-xl font-semibold mb-2">Issues We Address:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Incomplete document submission</li>
+            <li>Inaccurate claim deductions</li>
+          </ul>
+          <h4 class="text-xl font-semibold mt-4 mb-2">How We Help:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Thorough CQC reduces errors</li>
+            <li>Dispute resolution for inaccurate deductions</li>
+            <li>Expedited payments with strong payer relationships</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Service Card: Reimbursement Financing -->
+      <div class="flex flex-col md:flex-row items-center gap-8 glass-card p-10 mx-4 fade-in">
+        <div class="w-full md:w-1/2">
+          <img src="rembursement financing.jpg" alt="Reimbursement Financing" class="rounded-2xl shadow-lg" />
+        </div>
+        <div class="w-full md:w-1/2 text-left">
+          <h3 class="text-3xl font-bold mb-4">Reimbursement Financing</h3>
+          <h4 class="text-xl font-semibold mb-2">Issues We Address:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Revenue loss with non‑empanelled payers</li>
+          </ul>
+          <h4 class="text-xl font-semibold mt-4 mb-2">How We Help:</h4>
+          <ul class="list-disc ml-5 space-y-1 text-lg">
+            <li>Cashless services for patients</li>
+            <li>Error‑free processing</li>
+            <li>Automated QC reporting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modern Footer -->
+  <footer class="bg-gradient-to-r from-blue-900 to-blue-600 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Company Info -->
+      <div>
+        <h2 class="text-2xl font-bold mb-2">Medverve Healthcare</h2>
+        <p class="text-gray-300">Building Healthier Healthcare Systems.</p>
+        <div class="flex space-x-4 mt-4">
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+          <li><a href="about.html" class="hover:text-gray-300">About Us</a></li>
+          <li><a href="Services1.html" class="hover:text-gray-300">Services</a></li>
+          <li><a href="contact.html" class="hover:text-gray-300">Contact Us</a></li>
+          <li><a href="http://apps.medverve.com/" class="hover:text-gray-300">Login</a></li>
+        </ul>
+      </div>
+      <!-- Contact Details -->
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Contact Us</h3>
+        <p class="text-gray-300">info@medverve.com</p>
+        <p class="text-gray-300">+91-8050-071-616</p>
+        <p class="text-gray-300">Classic Copper Arch, 3rd Floor, #75, Panduranganagar, Bengaluru-560076, India</p>
+      </div>
+      <!-- Newsletter Subscription -->
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Stay Updated</h3>
+        <p class="text-gray-300 mb-2">Subscribe to our newsletter for the latest updates.</p>
+        <div class="flex">
+          <input type="email" placeholder="Your email" class="w-full p-2 rounded-l-lg text-gray-900 focus:outline-none" />
+          <button class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-r-lg">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-gray-500 pt-4 text-center text-gray-300">
+      <p>&copy; 2024 Medverve Healthcare. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- FontAwesome Icons for Social Media -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

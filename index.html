@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medverve Healthcare</title>
+  <!-- Google Fonts (used for the rest of the page) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- FontAwesome Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  <style>
+    /* Global Font Setting for body, etc. */
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Override Navbar font to match first snippet */
+    nav {
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+    /* Our Clients Slider */
+    .client-slider {
+      overflow: hidden;
+      position: relative;
+    }
+    .client-slider .logos {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 2rem; /* Adjust gap between logos */
+      animation: slide 10s linear infinite;
+    }
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar (Exact copy from first snippet) -->
+  <nav class="bg-white py-3 px-6 text-gray-800 shadow-md relative">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="Images/Medverve_Final_28-03-2013__1___1_-removebg-preview.png" alt="Medverve Logo" class="h-14 w-11 rounded-full">
+        <h1 class="text-lg font-semibold" style="color: #0077b6;">Medverve</h1>
+      </div>
+      <ul class="hidden md:flex gap-8 text-base font-medium">
+        <li><a href="index.html" class="hover:text-blue-600 transition">Home</a></li>
+        <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+        <li><a href="Services1.html" class="hover:text-blue-600 transition">Services</a></li>
+        <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+      </ul>
+      <a href="http://apps.medverve.com/" class="hidden md:block border-2 border-blue-600 px-4 py-1 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition">
+        Login
+      </a>
+      <button id="menu-toggle" class="md:hidden text-gray-800 text-2xl focus:outline-none">☰</button>
+    </div>
+    <ul id="mobile-menu" class="hidden md:hidden flex-col bg-white p-4 mt-2 space-y-2 text-base font-medium">
+      <li><a href="index.html" class="hover:text-blue-600 block">Home</a></li>
+      <li><a href="about.html" class="hover:text-blue-600 block">About Us</a></li>
+      <li><a href="Services1.html" class="hover:text-blue-600 block">Services</a></li>
+      <li><a href="contact.html" class="hover:text-blue-600 block">Contact</a></li>
+      <li>
+        <a href="http://apps.medverve.com/" class="border-2 border-blue-600 px-4 py-1 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition block text-center">
+          Login
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+  <!-- Hero Section with Claim Statistics -->
+  <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 py-24 bg-gradient-to-r from-blue-100 to-blue-200 overflow-hidden">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-800 drop-shadow-lg">
+      Empowering Hospitals, While We Handle Complex Credit Business
+    </h1>
+    <p class="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl">
+      Simplifying the claim process, accelerating payments, reducing disallowances, and optimizing your Hospital’s revenue cycle management with Medverve.
+    </p>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+      <!-- Claim Value Counter -->
+      <div class="backdrop-blur-md bg-white/60 p-6 rounded-xl shadow-lg">
+        <p class="text-gray-600 text-lg mb-2">Total value of claims managed till date</p>
+        <p class="text-5xl font-bold text-blue-600">₹<span id="claimsValue">0</span>+ Cr</p>
+      </div>
+      <!-- Claim Count Counter -->
+      <div class="backdrop-blur-md bg-white/60 p-6 rounded-xl shadow-lg">
+        <p class="text-gray-600 text-lg mb-2">Total No. of claims managed till date</p>
+        <p class="text-5xl font-bold text-blue-600"><span id="claimsCount">0</span>+</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Clients Section (Updated Slider) -->
+  <section class="bg-white py-12">
+    <h2 class="text-3xl font-bold text-gray-700 text-center mb-6">Trusted by Leading Hospitals in the Country</h2>
+    <div class="client-slider mx-auto max-w-6xl">
+      <div class="logos flex flex-nowrap gap-8">
+        <!-- First set of logos -->
+        <img src="Images/new_logo.png" alt="Client 1" class="h-16 object-contain">
+        <img src="Images/manipal-hospitals logo.png" alt="Client 2" class="h-16 object-contain">
+        <img src="Images/logoaster.svg" alt="Client 3" class="h-16 object-contain">
+        <img src="Images/cl_Logo.svg" alt="Client 4" class="h-16 object-contain">
+        <img src="Images/LOGO ustad .png" alt="Client 5" class="h-16 object-contain">
+        <img src="Images/Clearmedi-Logo-removebg-preview.png" alt="Client 6" class="h-16 object-contain">
+        <img src="Images/KH-logo.jpg" alt="Client 7" class="h-16 object-contain">
+        <img src="Images/logo ballari .png" alt="Client 8" class="h-16 object-contain">
+        <img src="Images/DrBrAmbedkar Medical College and Hospital.png" alt="Client 9" class="h-16 object-contain">
+        <img src="Images/rajshekar.png" alt="Client 10" class="h-16 object-contain">
+        <!-- Duplicate set for seamless looping -->
+        <img src="Images/new_logo.png" alt="Client 1" class="h-16 object-contain">
+        <img src="Images/manipal-hospitals logo.png" alt="Client 2" class="h-16 object-contain">
+        <img src="Images/logoaster.svg" alt="Client 3" class="h-16 object-contain">
+        <img src="Images/cl_Logo.svg" alt="Client 4" class="h-16 object-contain">
+        <img src="Images/LOGO ustad .png" alt="Client 5" class="h-16 object-contain">
+        <img src="Images/Clearmedi-Logo-removebg-preview.png" alt="Client 6" class="h-16 object-contain">
+        <img src="Images/KH-logo.jpg" alt="Client 7" class="h-16 object-contain">
+        <img src="Images/logo ballari .png" alt="Client 8" class="h-16 object-contain">
+        <img src="Images/DrBrAmbedkar Medical College and Hospital.png" alt="Client 9" class="h-16 object-contain">
+        <img src="Images/rajshekar.png" alt="Client 10" class="h-16 object-contain">
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Medverve Section -->
+  <section class="bg-gradient-to-r from-teal-500 to-blue-500 text-white py-16">
+    <h2 class="text-4xl font-bold text-center mb-8">Why Choose Medverve?</h2>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+      <div class="feature p-6 bg-white text-gray-900 rounded-lg shadow-lg flex flex-col items-center">
+        <i data-lucide="bar-chart" class="text-green-600 w-10 h-10"></i>
+        <h3 class="font-bold text-xl mt-4">AI-Powered Analytics</h3>
+        <p>Optimize claims with intelligent analytics for better accuracy and efficiency.</p>
+      </div>
+      <div class="feature p-6 bg-white text-gray-900 rounded-lg shadow-lg flex flex-col items-center">
+        <i data-lucide="check-circle" class="text-green-600 w-10 h-10"></i>
+        <h3 class="font-bold text-xl mt-4">Claim Quality Check</h3>
+        <p>Ensure claim compliance with payer-specific guidelines to reduce errors.</p>
+      </div>
+      <div class="feature p-6 bg-white text-gray-900 rounded-lg shadow-lg flex flex-col items-center">
+        <i data-lucide="clock" class="text-green-600 w-10 h-10"></i>
+        <h3 class="font-bold text-xl mt-4">Timely Dispatches</h3>
+        <p>Ensure prompt query resolution within the defined TAT for faster settlements.</p>
+      </div>
+      <div class="feature p-6 bg-white text-gray-900 rounded-lg shadow-lg flex flex-col items-center">
+        <i data-lucide="eye" class="text-green-600 w-10 h-10"></i>
+        <h3 class="font-bold text-xl mt-4">Real-Time Tracking</h3>
+        <p>Monitor claims instantly and minimize disallowances and rejections.</p>
+      </div>
+      <div class="feature p-6 bg-white text-gray-900 rounded-lg shadow-lg flex flex-col items-center">
+        <span class="text-green-600 text-4xl">₹</span>
+        <h3 class="font-bold text-xl mt-4">Accelerate Payments</h3>
+        <p>Speed up the reimbursement process with efficient payment tracking.</p>
+      </div>
+      <div class="feature p-6 bg-white text-gray-900 rounded-lg shadow-lg flex flex-col items-center">
+        <i data-lucide="credit-card" class="text-green-600 w-10 h-10"></i>
+        <h3 class="font-bold text-xl mt-4">Financing Services</h3>
+        <p>Offer financial support for hospitals dealing with non-empanelled payers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- "We're Making It Happen" Section (Scroll-triggered Counters) -->
+  <section id="makingItHappen" class="bg-[#0c2340] text-white py-16">
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-bold">We're Making It Happen</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 md:px-20">
+      <div class="bg-white text-center p-6 rounded-xl shadow-lg transition hover:scale-105 hover:text-green-500">
+        <img src="https://img.icons8.com/ios-filled/50/FF0000/city.png" alt="City Icon" class="w-12 h-12 mx-auto mb-4">
+        <h3 id="citiesCount" class="text-2xl font-bold text-black">0</h3>
+        <p class="text-black">Cities</p>
+      </div>
+      <div class="bg-white text-center p-6 rounded-xl shadow-lg transition hover:scale-105 hover:text-green-500">
+        <img src="https://img.icons8.com/ios-filled/50/FF0000/contract.png" alt="Contract Icon" class="w-12 h-12 mx-auto mb-4">
+        <h3 id="claimsManaged" class="text-2xl font-bold text-black">0</h3>
+        <p class="text-black">Worth of Claim Managed</p>
+      </div>
+      <div class="bg-white text-center p-6 rounded-xl shadow-lg transition hover:scale-105 hover:text-green-500">
+        <img src="https://img.icons8.com/ios-filled/50/FF0000/data-in-both-directions.png" alt="Cashless Claim Icon" class="w-12 h-12 mx-auto mb-4">
+        <h3 id="cashlessClaim" class="text-2xl font-bold text-black">0</h3>
+        <p class="text-black">Cashless Claim</p>
+      </div>
+    </div>
+  </section>
+  <!-- Our Services Section -->
+  <section class="bg-[#0c2340] text-white py-16">
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-bold">Our Services</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 md:px-20">
+      <!-- Service Card 1 -->
+      <div class="flex flex-col h-full bg-[#FDE8D7] p-8 rounded-2xl shadow-lg hover:scale-105 transition">
+        <img src="https://img.icons8.com/ios/50/000000/contract.png" alt="Icon" class="w-12 h-12 mb-4">
+        <h3 class="text-2xl font-bold text-black mb-2">AI RCM Platform</h3>
+        <p class="text-base leading-relaxed text-black tracking-wide mb-4">
+          Our RCM platform tracks the entire journey of a claim, providing real-time updates and actionable insights.
+        </p>
+        <div class="mt-auto">
+          <a href="Services1.html#revenue-cycle-management" class="py-2 px-6 rounded-full text-sm font-semibold inline-block text-center text-black hover:bg-[#f2c9a7] transition" style="background: #F2C9A7;">Find out more</a>
+        </div>
+      </div>
+      <!-- Service Card 2 -->
+      <div class="flex flex-col h-full bg-[#DCCAFF] p-8 rounded-2xl shadow-lg hover:scale-105 transition">
+        <img src="https://img.icons8.com/ios/50/000000/document.png" alt="Icon" class="w-12 h-12 mb-4">
+        <h3 class="text-2xl font-bold text-black mb-2">Claim Quality Check (CQC)</h3>
+        <p class="text-base leading-relaxed text-black tracking-wide mb-4">
+          Dynamic Checklist: Secures complete and accurate document submission. Error-Free Processing: Guarantees precision for seamless claim approvals.
+        </p>
+        <div class="mt-auto">
+          <a href="Services1.html#claim-quality-check" class="py-2 px-6 rounded-full text-sm font-semibold inline-block text-center text-black hover:bg-[#b5a2e0] transition" style="background: #B5A2E0;">Find out more</a>
+        </div>
+      </div>
+      <!-- Service Card 3 -->
+      <div class="flex flex-col h-full bg-[#E5FFC7] p-8 rounded-2xl shadow-lg hover:scale-105 transition">
+        <img src="https://img.icons8.com/ios/50/000000/money-box.png" alt="Icon" class="w-12 h-12 mb-4">
+        <h3 class="text-2xl font-bold text-black mb-2">Reconciliation Services</h3>
+        <p class="text-base leading-relaxed text-black tracking-wide mb-4">
+          We correct missing or misrecorded claim IDs. AI-powered reconciliation captures settlement details, while automated notifications keep hospitals updated.
+        </p>
+        <div class="mt-auto">
+          <a href="Services1.html#reconciliation-services" class="py-2 px-6 rounded-full text-sm font-semibold inline-block text-center text-black hover:bg-[#c0e8a3] transition" style="background: #C0E8A3;">Find out more</a>
+        </div>
+      </div>
+      <!-- Service Card 4 -->
+      <div class="flex flex-col h-full bg-[#C6E4F2] p-8 rounded-2xl shadow-lg hover:scale-105 transition">
+        <img src="Images/download__1_-removebg-preview.png" alt="Icon" class="w-12 h-12 mb-4">
+        <h3 class="text-2xl font-bold text-black mb-2">Accounts Receivable Management</h3>
+        <p class="text-base leading-relaxed text-black tracking-wide mb-4">
+          Leveraging strong relationships with payers, Medverve expedites payments while ensuring transparency and efficiency.
+        </p>
+        <div class="mt-auto">
+          <a href="Services1.html#accounts-receivable-management" class="py-2 px-6 rounded-full text-sm font-semibold inline-block text-center text-black hover:bg-[#a9c9d6] transition" style="background: #A9C9D6;">Find out more</a>
+        </div>
+      </div>
+      <!-- Service Card 5 -->
+      <div class="flex flex-col h-full bg-[#FDE8D7] p-8 rounded-2xl shadow-lg hover:scale-105 transition">
+        <img src="https://img.icons8.com/ios/50/000000/contract.png" alt="Icon" class="w-12 h-12 mb-4">
+        <h3 class="text-2xl font-bold text-black mb-2">Social Schemes Services</h3>
+        <p class="text-base leading-relaxed text-black tracking-wide mb-4">
+          A thorough CQC is performed to reduce NMIs and delayed payments. Review requests help contest inaccurate deductions effectively.
+        </p>
+        <div class="mt-auto">
+          <a href="Services1.html#social-schemes-management" class="py-2 px-6 rounded-full text-sm font-semibold inline-block text-center text-black hover:bg-[#f2c9a7] transition" style="background: #F2C9A7;">Find out more</a>
+        </div>
+      </div>
+      <!-- Service Card 6 -->
+      <div class="flex flex-col h-full bg-[#FFD6E1] p-8 rounded-2xl shadow-lg hover:scale-105 transition">
+        <img src="https://img.icons8.com/ios/50/000000/contract.png" alt="Icon" class="w-12 h-12 mb-4">
+        <h3 class="text-2xl font-bold text-black mb-2">Reimbursement Financing</h3>
+        <p class="text-base leading-relaxed text-black tracking-wide mb-4">
+          Offering cashless services for non-empanelled payers, ensuring immediate payment to hospitals.
+        </p>
+        <div class="mt-auto">
+          <a href="Services1.html#reimbursement-financing" class="py-2 px-6 rounded-full text-sm font-semibold inline-block text-center text-black hover:bg-[#e5b7c3] transition" style="background: #E5B7C3;">Find out more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- "We're Making It Happen" Section (Scroll-triggered Counters) -->
+  <!-- <section id="makingItHappen" class="bg-[#0c2340] text-white py-16">
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-bold">We're Making It Happen</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 md:px-20">
+      <div class="bg-white text-center p-6 rounded-xl shadow-lg transition hover:scale-105 hover:text-green-500">
+        <img src="https://img.icons8.com/ios-filled/50/FF0000/city.png" alt="City Icon" class="w-12 h-12 mx-auto mb-4">
+        <h3 id="citiesCount" class="text-2xl font-bold text-black">0</h3>
+        <p class="text-black">Cities</p>
+      </div>
+      <div class="bg-white text-center p-6 rounded-xl shadow-lg transition hover:scale-105 hover:text-green-500">
+        <img src="https://img.icons8.com/ios-filled/50/FF0000/contract.png" alt="Contract Icon" class="w-12 h-12 mx-auto mb-4">
+        <h3 id="claimsManaged" class="text-2xl font-bold text-black">0</h3>
+        <p class="text-black">Worth of Claim Managed</p>
+      </div>
+      <div class="bg-white text-center p-6 rounded-xl shadow-lg transition hover:scale-105 hover:text-green-500">
+        <img src="https://img.icons8.com/ios-filled/50/FF0000/data-in-both-directions.png" alt="Cashless Claim Icon" class="w-12 h-12 mx-auto mb-4">
+        <h3 id="cashlessClaim" class="text-2xl font-bold text-black">0</h3>
+        <p class="text-black">Cashless Claim</p>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-blue-900 to-blue-600 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <h2 class="text-2xl font-bold">Medverve</h2>
+        <p class="mt-2 text-gray-300">Building Healthier Healthcare Systems.</p>
+        <div class="flex space-x-4 mt-4">
+          <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="hover:text-white"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold">Quick Links</h3>
+        <ul class="mt-4 space-y-2">
+          <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+          <li><a href="about.html" class="hover:text-gray-300">About Us</a></li>
+          <li><a href="Services1.html" class="hover:text-gray-300">Services</a></li>
+          <li><a href="contact.html" class="hover:text-gray-300">Contact Us</a></li>
+          <li><a href="http://apps.medverve.com/" class="hover:text-gray-300">Login</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold">Contact Us</h3>
+        <p class="mt-4 text-gray-300">info@medverve.com</p>
+        <p class="text-gray-300">Rekha Classic Arch, 3rd Floor, #75, Panduranganagar, Bengaluru-560076, India</p>
+      </div>
+    </div>
+    <div class="mt-10 border-t border-gray-500 pt-6 text-center text-gray-300">
+      <p>&copy; 2025 Medverve. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Counter Animation and Intersection Observer for "We're Making It Happen"
+    document.addEventListener("DOMContentLoaded", function(){
+      function animateCounter(id, start, end, duration){
+        const obj = document.getElementById(id);
+        const range = end - start;
+        let current = start;
+        const increment = range / (duration / 30);
+        function step(){
+          current += increment;
+          if(current < end){
+            obj.innerText = Math.floor(current).toLocaleString("en-IN");
+            requestAnimationFrame(step);
+          } else {
+            obj.innerText = end.toLocaleString("en-IN");
+          }
+        }
+        step();
+      }
+      
+      window.addEventListener("load", function(){
+        animateCounter("claimsValue", 0, 10000, 8000);
+        animateCounter("claimsCount", 0, 1200000, 9000);
+      });
+      
+      let hasAnimated = false;
+      const makingItHappenSection = document.getElementById("makingItHappen");
+      if(makingItHappenSection){
+        const observer = new IntersectionObserver((entries, observer)=>{
+          entries.forEach(entry=>{
+            if(entry.isIntersecting && !hasAnimated){
+              animateCounter("citiesCount", 0, 80, 3000);
+              animateCounter("claimsManaged", 0, 10000, 4000);
+              animateCounter("cashlessClaim", 0, 1200000, 5000);
+              hasAnimated = true;
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        observer.observe(makingItHappenSection);
+      }
+    });
+  </script>
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

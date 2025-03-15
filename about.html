@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story - Medverve Healthcare</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Montserrat for body text and Poppins for headings -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global font change */
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', sans-serif;
+      }
+      /* Override navbar font to match original design */
+      nav {
+        font-family: 'Helvetica Neue', sans-serif;
+      }
+      /* Animated Gradient Background for Hero */
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .hero-bg {
+        background: linear-gradient(-45deg, #1d2671, #c33764, #1d2671, #c33764);
+        background-size: 400% 400%;
+        animation: gradientShift 10s ease infinite;
+      }
+      /* Shimmer effect on headings */
+      .shimmer {
+        position: relative;
+        color: #fff;
+        overflow: hidden;
+      }
+      .shimmer::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: shimmerAnim 2s infinite;
+      }
+      @keyframes shimmerAnim {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      /* Fade in & slide-up on scroll */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
+      }
+      .animate-on-scroll.scrolled {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar (Exact copy from your first design) -->
+    <nav class="bg-white py-3 px-6 text-gray-800 shadow-md relative">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <img
+            src="Images/Medverve_Final_28-03-2013__1___1_-removebg-preview.png"
+            alt="Medverve Logo"
+            class="h-14 w-11 rounded-full"
+          />
+          <h1 class="text-lg font-semibold" style="color: #0077b6;">Medverve</h1>
+        </div>
+        <ul class="hidden md:flex gap-8 text-base font-medium">
+          <li><a href="index.html" class="hover:text-blue-600 transition">Home</a></li>
+          <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+          <li><a href="Services1.html" class="hover:text-blue-600 transition">Services</a></li>
+          <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+        </ul>
+        <a
+          href="http://apps.medverve.com/"
+          class="hidden md:block border-2 border-blue-600 px-4 py-1 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition"
+        >
+          Login
+        </a>
+        <button id="menu-toggle" class="md:hidden text-gray-800 text-2xl focus:outline-none">☰</button>
+      </div>
+      <ul id="mobile-menu" class="hidden md:hidden flex-col bg-white p-4 mt-2 space-y-2 text-base font-medium">
+        <li><a href="index.html" class="hover:text-blue-600 block">Home</a></li>
+        <li><a href="about.html" class="hover:text-blue-600 block">About Us</a></li>
+        <li><a href="Services1.html" class="hover:text-blue-600 block">Services</a></li>
+        <li><a href="contact.html" class="hover:text-blue-600 block">Contact</a></li>
+        <li>
+          <a
+            href="http://apps.medverve.com/"
+            class="border-2 border-blue-600 px-4 py-1 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition block text-center"
+          >
+            Login
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 pb-12 relative overflow-hidden">
+      <h2 class="text-5xl md:text-7xl font-extrabold shimmer mb-8 animate-on-scroll">
+        Our Story
+      </h2>
+      <div class="max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll">
+        <!-- Image Card -->
+        <div class="flex justify-center">
+          <img
+            src="Images/Work_2.jpg"
+            alt="Our Story"
+            class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500"
+          />
+        </div>
+        <!-- Text Content -->
+        <div class="flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6 text-white text-lg md:text-xl">
+          <p>
+            Medverve is a Healthcare Fintech Company that aggregates data
+            across Payers and Providers—empowering our clients with comprehensive
+            access, rigorous analysis, and actionable insights for over a decade.
+          </p>
+          <p>
+            Leveraging cutting-edge technology and industry insights, we tackle
+            challenges like claim denials, documentation errors, delayed payments,
+            and outstanding receivables.
+          </p>
+          <p>
+            Beyond claim processing, we enable hospitals to boost operational
+            efficiency, mitigate risks, and maximize revenue potential through
+            strategic, data-driven solutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="py-20 px-6 bg-white">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Vision Text -->
+        <div class="space-y-6 animate-on-scroll">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-800">Vision</h2>
+          <p class="text-gray-700 text-lg md:text-xl">
+            To create a seamless digital health insurance ecosystem where hospitals
+            and policyholders focus solely on treatment and recovery.
+          </p>
+        </div>
+        <!-- Vision Image (Reduced Size) -->
+        <div class="flex justify-center animate-on-scroll">
+          <img
+            src="Images/vision-removebg-preview copy.png"
+            alt="Vision"
+            class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500 w-1/2 md:w-1/3"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-20 px-6 bg-gray-50">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Mission Image (Reduced Size) -->
+        <div class="flex justify-center animate-on-scroll">
+          <img
+            src="Images/target-removebg-preview.png"
+            alt="Mission"
+            class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500 w-1/2 md:w-1/3"
+          />
+        </div>
+        <!-- Mission Text -->
+        <div class="space-y-6 animate-on-scroll">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-800">Mission</h2>
+          <p class="text-gray-700 text-lg md:text-xl">
+            Medverve aims to simplify the health insurance experience by
+            managing the complete medical claim journey for hospitals—ensuring
+            smooth, efficient, and transparent processes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-900 to-blue-600 text-white py-12">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+        <!-- Company Info -->
+        <div>
+          <h2 class="text-2xl font-bold">Medverve</h2>
+          <p class="mt-2 text-gray-300">
+            Building Healthier Healthcare Systems.
+          </p>
+          <div class="flex space-x-4 mt-4">
+            <a href="#" class="hover:text-white">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="hover:text-white">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="#" class="hover:text-white">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="hover:text-white">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-xl font-semibold">Quick Links</h3>
+          <ul class="mt-4 space-y-2">
+            <li>
+              <a href="index.html" class="hover:text-gray-300">Home</a>
+            </li>
+            <li>
+              <a href="about.html" class="hover:text-gray-300">About Us</a>
+            </li>
+            <li>
+              <a href="Services1.html" class="hover:text-gray-300">Services</a>
+            </li>
+            <li>
+              <a href="contact.html" class="hover:text-gray-300">Contact Us</a>
+            </li>
+            <li>
+              <a href="http://apps.medverve.com/" class="hover:text-gray-300">Login</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Contact Details -->
+        <div>
+          <h3 class="text-xl font-semibold">Contact Us</h3>
+          <p class="mt-4 text-gray-300">info@medverve.com</p>
+          <p class="text-gray-300">
+            Rekha Classic Arch, 3rd Floor, #75, Panduranganagar, Bengaluru-560076,
+            India
+          </p>
+        </div>
+        <!-- (Optional Newsletter Section commented out) -->
+      </div>
+      <div class="mt-10 border-t border-gray-500 pt-6 text-center text-gray-300">
+        <p>&copy; 2025 Medverve. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- FontAwesome Icons (For Social Media) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+    
+    <!-- Simple Scroll Animation Script -->
+    <script>
+      const scrollElements = document.querySelectorAll(".animate-on-scroll");
+      const elementInView = (el, dividend = 1) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+          elementTop <=
+          (window.innerHeight || document.documentElement.clientHeight) / dividend
+        );
+      };
+
+      const displayScrollElement = (element) => {
+        element.classList.add("scrolled");
+      };
+
+      const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+          if (elementInView(el, 1.2)) {
+            displayScrollElement(el);
+          }
+        });
+      };
+
+      window.addEventListener("scroll", handleScrollAnimation);
+      // Trigger animation on load
+      handleScrollAnimation();
+    </script>
+  </body>
+</html>
